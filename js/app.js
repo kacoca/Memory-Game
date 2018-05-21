@@ -38,7 +38,12 @@ for(let i = 0; i < icons.length; i++) {
     if(openedCards.length === 1) {
       card.classList.add("open", "show");
       openedCards.push(this);
-      
+      //comparing two opened cards
+      if(this.innerHTML === openedCards[0].innerHTML) {
+        console.log("matched");
+      } else {
+        console.log("doesn't match");
+      }
     } else {
       // no cards are open
       card.classList.add("open", "show");
