@@ -20,6 +20,7 @@ const icons = ["fa fa-diamond",
             "fa fa-bicycle"];
 
 const cardsContainer = document.querySelector(".deck");
+let openedCards = [];
 
 //create card
 
@@ -28,6 +29,23 @@ for(let i = 0; i < icons.length; i++) {
   card.classList.add("card");
   card.innerHTML = `<i class="${icons[i]}"></i>`;
   cardsContainer.appendChild(card);
+
+  // card click event
+
+  card.addEventListener("click", function() {
+
+    // a card has been opened
+    if(openedCards.length === 1) {
+      card.classList.add("open", "show");
+      openedCards.push(this);
+      
+    } else {
+      // no cards are open
+      card.classList.add("open", "show");
+      openedCards.push(this);
+    }
+
+  });
 }
 
 /*
