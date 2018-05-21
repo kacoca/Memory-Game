@@ -2,22 +2,33 @@
  * Create a list that holds all of your cards
  */
 
-let cards = ["fa-diamond",
-            "fa-diamond",
-            "fa-paper-plane-o",
-            "fa-paper-plane-o",
-            "fa-anchor",
-            "fa-anchor",
-            "fa-bolt",
-            "fa-bolt",
-            "fa-cube",
-            "fa-cube",
-            "fa-anchor",
-            "fa-anchor",
-            "fa-leaf",
-            "fa-leaf",
-            "fa-bicycle",
-            "fa-bicycle"];
+const icons = ["fa fa-diamond",
+            "fa fa-diamond",
+            "fa fa-paper-plane-o",
+            "fa fa-paper-plane-o",
+            "fa fa-anchor",
+            "fa fa-anchor",
+            "fa fa-bolt",
+            "fa fa-bolt",
+            "fa fa-cube",
+            "fa fa-cube",
+            "fa fa-anchor",
+            "fa fa-anchor",
+            "fa fa-leaf",
+            "fa fa-leaf",
+            "fa fa-bicycle",
+            "fa fa-bicycle"];
+
+const cardsContainer = document.querySelector(".deck");
+
+//create card
+
+for(let i = 0; i < icons.length; i++) {
+  const card = document.createElement("div");
+  card.classList.add("card");
+  cardsContainer.appendChild(card);
+
+}
 
 /*
  * Display the cards on the page
