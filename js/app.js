@@ -34,11 +34,12 @@ for(let i = 0; i < icons.length; i++) {
 
   card.addEventListener("click", function() {
 
+    const currentCard = this;
+    const previousCard = openedCards[0];
+
     // a card has been opened
     if(openedCards.length === 1) {
 
-      const currentCard = this;
-      const previousCard = openedCards[0];
       card.classList.add("open", "show");
       openedCards.push(this);
       //comparing two opened cards
@@ -50,7 +51,10 @@ for(let i = 0; i < icons.length; i++) {
         openedCards =  [];
 
       } else {
-        console.log("doesn't match");
+        currentCard.classList.remove("open", "show");
+        previousCard.classList.remove("open", "show");
+
+        openedCards = [];
       }
     } else {
       // no cards are open
