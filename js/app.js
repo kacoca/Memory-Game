@@ -12,8 +12,8 @@ const icons = ["fa fa-diamond",
             "fa fa-bolt",
             "fa fa-cube",
             "fa fa-cube",
-            "fa fa-anchor",
-            "fa fa-anchor",
+            "fa fa-bomb",
+            "fa fa-bomb",
             "fa fa-leaf",
             "fa fa-leaf",
             "fa fa-bicycle",
@@ -74,8 +74,8 @@ function compare(currentCard, previousCard){
     setTimeout(function() {
       currentCard.classList.remove("open", "show", "disable");
       previousCard.classList.remove("open", "show", "disable");
-      openedCards = [];
     }, 600);
+    openedCards = [];
   }
   // add moves
   addMove();
@@ -95,11 +95,24 @@ movesContainer.innerHTML = 0;
 function addMove() {
   moves++;
   movesContainer.innerHTML = moves;
+
+  // set rating
+  rating();
 }
 
-//rating system
-
-
+// rating system
+const starsContainer = document.querySelector(".stars");
+const star = `<li><i class="fa fa-star"></i></li>`;
+starsContainer.innerHTML = star + star + star;
+function rating() {
+  if(moves < 10) {
+    starsContainer.innerHTML = star + star + star;
+  } else if (moves < 15) {
+    starsContainer.innerHTML = star + star;
+  } else {
+    starsContainer.innerHTML = star;
+  }
+}
 //restart game
 const restartButton = document.querySelector(".restart");
 restartButton.addEventListener("click", function() {
@@ -111,6 +124,7 @@ restartButton.addEventListener("click", function() {
   matchedCards = [];
   moves = 0;
   movesContainer.innerHTML = moves;
+  starsContainer.innerHTML = star + star + star;
 });
 
 //begin game
