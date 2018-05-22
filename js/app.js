@@ -21,6 +21,7 @@ const icons = ["fa fa-diamond",
 
 const cardsContainer = document.querySelector(".deck");
 let openedCards = [];
+let matchedCards = [];
 
 //create card
 
@@ -44,12 +45,14 @@ for(let i = 0; i < icons.length; i++) {
       openedCards.push(this);
       //comparing two opened cards
       if(currentCard.innerHTML === previousCard.innerHTML) {
-
+         // matched cards
         currentCard.classList.add("match");
         previousCard.classList.add("match");
-
+        matchedCards.push(currentCard, previousCard);
         openedCards =  [];
-
+        // check if game is over
+        isOver();
+        
       } else {
         currentCard.classList.remove("open", "show");
         previousCard.classList.remove("open", "show");
@@ -63,6 +66,12 @@ for(let i = 0; i < icons.length; i++) {
     }
 
   });
+}
+
+function isOver() {
+  if(matchedCards.length === icons.length) {
+    alert("You Win!");
+  }
 }
 
 /*
