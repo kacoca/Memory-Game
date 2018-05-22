@@ -87,6 +87,17 @@ function isOver() {
   }
 }
 
+//restart game
+const restartButton = document.querySelector(".restart");
+restartButton.addEventListener("click", function() {
+  // delete all cards
+  cardsContainer.innerHTML = "";
+  // call init to create new cards
+  init();
+  // reset array variables
+  matchedCards = [];
+});
+
 //begin game
 init();
 
