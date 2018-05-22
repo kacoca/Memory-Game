@@ -72,8 +72,8 @@ function compare(currentCard, previousCard){
 
     // show both opened cards
     setTimeout(function() {
-      currentCard.classList.remove("open", "show");
-      previousCard.classList.remove("open", "show");
+      currentCard.classList.remove("open", "show", "disable");
+      previousCard.classList.remove("open", "show", "disable");
       openedCards = [];
     }, 600);
 
