@@ -23,16 +23,20 @@ const cardsContainer = document.querySelector(".deck");
 let openedCards = [];
 let matchedCards = [];
 
-//create card
-
+//create card and start the game
+function init() {
 for(let i = 0; i < icons.length; i++) {
   const card = document.createElement("li");
   card.classList.add("card");
   card.innerHTML = `<i class="${icons[i]}"></i>`;
   cardsContainer.appendChild(card);
+  // add click event to each card
+  click(card);
+  }
+}
+//click event
 
-  // card click event
-
+function click(card) {
   card.addEventListener("click", function() {
 
     const currentCard = this;
@@ -44,25 +48,7 @@ for(let i = 0; i < icons.length; i++) {
       card.classList.add("open", "show");
       openedCards.push(this);
       //comparing two opened cards
-      if(currentCard.innerHTML === previousCard.innerHTML) {
-         // matched cards
-        currentCard.classList.add("match");
-        previousCard.classList.add("match");
-        matchedCards.push(currentCard, previousCard);
-        openedCards =  [];
-        // check if all the cards are matched
-        isOver();
-
-      } else {
-
-        // show both opened cards
-        setTimeout(function() {
-          currentCard.classList.remove("open", "show");
-          previousCard.classList.remove("open", "show");
-          openedCards = [];
-        }, 600);
-
-      }
+      compare(currentCard, previousCard);
     } else {
       // no cards are open
       card.classList.add("open", "show");
@@ -71,12 +57,37 @@ for(let i = 0; i < icons.length; i++) {
 
   });
 }
+//function to compare cards
+function compare(currentCard, previousCard){
+  if(currentCard.innerHTML === previousCard.innerHTML) {
+     // matched cards
+    currentCard.classList.add("match");
+    previousCard.classList.add("match");
+    matchedCards.push(currentCard, previousCard);
+    openedCards =  [];
+    // check if all the cards are matched
+    isOver();
+
+  } else {
+
+    // show both opened cards
+    setTimeout(function() {
+      currentCard.classList.remove("open", "show");
+      previousCard.classList.remove("open", "show");
+      openedCards = [];
+    }, 600);
+
+  }
+}
 
 function isOver() {
   if(matchedCards.length === icons.length) {
     alert("You Win!");
   }
 }
+
+//begin game
+init();
 
 /*
  * Display the cards on the page
