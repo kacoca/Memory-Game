@@ -36,11 +36,19 @@ for(let i = 0; i < icons.length; i++) {
 
     // a card has been opened
     if(openedCards.length === 1) {
+
+      const currentCard = this;
+      const previousCard = openedCards[0];
       card.classList.add("open", "show");
       openedCards.push(this);
       //comparing two opened cards
-      if(this.innerHTML === openedCards[0].innerHTML) {
-        console.log("matched");
+      if(currentCard.innerHTML === previousCard.innerHTML) {
+
+        currentCard.classList.add("match");
+        previousCard.classList.add("match");
+
+        openedCards =  [];
+
       } else {
         console.log("doesn't match");
       }
