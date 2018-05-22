@@ -45,13 +45,13 @@ function click(card) {
     // a card has been opened
     if(openedCards.length === 1) {
 
-      card.classList.add("open", "show");
+      card.classList.add("open", "show", "disable");
       openedCards.push(this);
       //comparing two opened cards
       compare(currentCard, previousCard);
     } else {
       // no cards are open
-      card.classList.add("open", "show");
+      card.classList.add("open", "show", "disable");
       openedCards.push(this);
     }
 
@@ -80,6 +80,7 @@ function compare(currentCard, previousCard){
   }
 }
 
+//function to check if the game is over
 function isOver() {
   if(matchedCards.length === icons.length) {
     alert("You Win!");
