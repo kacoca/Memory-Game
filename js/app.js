@@ -50,12 +50,15 @@ for(let i = 0; i < icons.length; i++) {
         previousCard.classList.add("match");
         matchedCards.push(currentCard, previousCard);
         openedCards =  [];
-        // check if game is over
+        // check if all the cards are matched
         isOver();
-        
+
       } else {
-        currentCard.classList.remove("open", "show");
-        previousCard.classList.remove("open", "show");
+
+        setTimeout(function() {
+          currentCard.classList.remove("open", "show");
+          previousCard.classList.remove("open", "show");
+        }, 600);
 
         openedCards = [];
       }
