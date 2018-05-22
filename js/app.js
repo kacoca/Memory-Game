@@ -76,8 +76,9 @@ function compare(currentCard, previousCard){
       previousCard.classList.remove("open", "show", "disable");
       openedCards = [];
     }, 600);
-
   }
+  // add moves
+  addMove();
 }
 
 //function to check if the game is over
@@ -85,6 +86,13 @@ function isOver() {
   if(matchedCards.length === icons.length) {
     alert("You Win!");
   }
+}
+
+//add moves
+
+let moves = 0;
+function addMove() {
+  moves++;
 }
 
 //restart game
