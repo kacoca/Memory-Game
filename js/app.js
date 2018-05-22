@@ -55,12 +55,13 @@ for(let i = 0; i < icons.length; i++) {
 
       } else {
 
+        // show both opened cards
         setTimeout(function() {
           currentCard.classList.remove("open", "show");
           previousCard.classList.remove("open", "show");
+          openedCards = [];
         }, 600);
 
-        openedCards = [];
       }
     } else {
       // no cards are open
