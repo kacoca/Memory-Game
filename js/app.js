@@ -1,7 +1,4 @@
-/*
- * Create a list that holds all of your cards
- */
-
+// varibles list
 const icons = ["fa fa-diamond",
             "fa fa-diamond",
             "fa fa-paper-plane-o",
@@ -19,10 +16,27 @@ const icons = ["fa fa-diamond",
             "fa fa-bicycle",
             "fa fa-bicycle"];
 
+// cards
 const cardsContainer = document.querySelector(".deck");
 let openedCards = [];
 let matchedCards = [];
+// timer start
 let firstClick = true;
+// moves
+const movesContainer =  document.querySelector(".moves");
+let moves = 0;
+movesContainer.innerHTML = 0;
+// rating
+const starsContainer = document.querySelector(".stars");
+const star = `<li><i class="fa fa-star"></i></li>`;
+starsContainer.innerHTML = star + star + star;
+// timer
+const timerContainer = document.querySelector(".timer");
+let liveTimer,
+    totalSeconds = 0;
+    totalMinutes = 0;
+// restart
+const restartButton = document.querySelector(".restart");
 
 //create card and start the game
 function init() {
@@ -41,12 +55,13 @@ function init() {
 function click(card) {
   card.addEventListener("click", function() {
 
+    if(firstClick) {
+      startTimer();
+    firstClick = false; }
+
     const currentCard = this;
     const previousCard = openedCards[0];
 
-    if(firstClick) {
-      timer();
-    firstClick = false; }
     // a card has been opened
     if(openedCards.length === 1) {
 
@@ -56,7 +71,7 @@ function click(card) {
       compare(currentCard, previousCard);
     } else {
       // no cards are open
-      card.classList.add("open", "show", "disable");
+      currentCard.classList.add("open", "show", "disable");
       openedCards.push(this);
     }
   });
@@ -90,14 +105,12 @@ function compare(currentCard, previousCard){
 //function to check if the game is over
 function isOver() {
   if(matchedCards.length === icons.length) {
-    alert("You Win!");
+    stopTimer();
+    gamewon();
   }
 }
 
 //add moves
-const movesContainer =  document.querySelector(".moves");
-let moves = 0;
-movesContainer.innerHTML = 0;
 function addMove() {
   moves++;
   movesContainer.innerHTML = moves;
@@ -107,9 +120,6 @@ function addMove() {
 }
 
 // rating system
-const starsContainer = document.querySelector(".stars");
-const star = `<li><i class="fa fa-star"></i></li>`;
-starsContainer.innerHTML = star + star + star;
 function rating() {
   if(moves < 10) {
     starsContainer.innerHTML = star + star + star;
@@ -121,41 +131,52 @@ function rating() {
 }
 
 // timer
-const minutes = document.querySelector("#minutes")
-const seconds = document.querySelector("#seconds")
-let count = 0;
-const renderTimer = () => {
-      count += 1;
-      minutes.innerHTML = Math.floor(count / 60).toString().padStart(2, "0");
-      seconds.innerHTML = (count % 60).toString().padStart(2, "0");
-    }
 
-function timer(){
-   setInterval(renderTimer, 1000)
+// Set the default value to the timer's container
+timerContainer.innerHTML = totalMinutes + ":" + totalSeconds;
+
+ function startTimer() {
+    liveTimer = setInterval(function() {
+        // Increase the totalSeconds by 1
+        totalSeconds++;
+
+        if(totalSeconds === 60){
+          totalMinutes++;
+          totalSeconds = 0;
+        }
+
+        // Update the HTML Container with the new time
+        timerContainer.innerHTML = totalMinutes + ":" + totalSeconds;
+    }, 1000);
+}
+
+function stopTimer() {
+  clearInterval(liveTimer);
+}
+
+function gameWon() {
+  const modal = document.querySelector(".modal");
+  modal.innerHTML = "You Win!";
 }
 //restart game
-const restartButton = document.querySelector(".restart");
 restartButton.addEventListener("click", function() {
   // delete all cards
   cardsContainer.innerHTML = "";
   // call init to create new cards
   init();
-  // reset array variables
+  // reset variables
   matchedCards = [];
   moves = 0;
   movesContainer.innerHTML = moves;
   starsContainer.innerHTML = star + star + star;
+  totalSeconds = 0;
+  totalMinutes = 0;
+  timerContainer.innerHTML = totalMinutes + ":" + totalSeconds;
+
 });
 
 //begin game
 init();
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -171,15 +192,3 @@ function shuffle(array) {
 
     return array;
 }
-
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
