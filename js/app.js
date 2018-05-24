@@ -22,14 +22,16 @@ const icons = ["fa fa-diamond",
 const cardsContainer = document.querySelector(".deck");
 let openedCards = [];
 let matchedCards = [];
+let firstClick = true;
 
 //create card and start the game
 function init() {
-for(let i = 0; i < icons.length; i++) {
-  const card = document.createElement("li");
-  card.classList.add("card");
-  card.innerHTML = `<i class="${icons[i]}"></i>`;
-  cardsContainer.appendChild(card);
+  //const icons = shuffle(iconsArray);
+  for(let i = 0; i < icons.length; i++) {
+    const card = document.createElement("li");
+    card.classList.add("card");
+    card.innerHTML = `<i class="${icons[i]}"></i>`;
+    cardsContainer.appendChild(card);
   // add click event to each card
   click(card);
   }
@@ -42,6 +44,9 @@ function click(card) {
     const currentCard = this;
     const previousCard = openedCards[0];
 
+    if(firstClick) {
+      timer();
+    firstClick = false; }
     // a card has been opened
     if(openedCards.length === 1) {
 
@@ -54,9 +59,10 @@ function click(card) {
       card.classList.add("open", "show", "disable");
       openedCards.push(this);
     }
-
   });
 }
+
+
 //function to compare cards
 function compare(currentCard, previousCard){
   if(currentCard.innerHTML === previousCard.innerHTML) {
@@ -112,6 +118,20 @@ function rating() {
   } else {
     starsContainer.innerHTML = star;
   }
+}
+
+// timer
+const minutes = document.querySelector("#minutes")
+const seconds = document.querySelector("#seconds")
+let count = 0;
+const renderTimer = () => {
+      count += 1;
+      minutes.innerHTML = Math.floor(count / 60).toString().padStart(2, "0");
+      seconds.innerHTML = (count % 60).toString().padStart(2, "0");
+    }
+
+function timer(){
+   setInterval(renderTimer, 1000)
 }
 //restart game
 const restartButton = document.querySelector(".restart");
