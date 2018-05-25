@@ -33,12 +33,13 @@ starsContainer.innerHTML = star + star + star;
 // timer
 const timerContainer = document.querySelector(".timer");
 let liveTimer,
-    totalSeconds = 0;
-    totalMinutes = 0;
+    seconds = 0;
+    minutes = 0;
+timerContainer.innerHTML = minutes + ":" + seconds;
 // restart
 const restartButton = document.querySelector(".restart");
 
-//create card and start the game
+// create card and start the game
 function init() {
   //const icons = shuffle(iconsArray);
   for(let i = 0; i < icons.length; i++) {
@@ -50,7 +51,7 @@ function init() {
   click(card);
   }
 }
-//click event
+// click event
 
 function click(card) {
   card.addEventListener("click", function() {
@@ -67,7 +68,7 @@ function click(card) {
 
       card.classList.add("open", "show", "disable");
       openedCards.push(this);
-      //comparing two opened cards
+      // comparing two opened cards
       compare(currentCard, previousCard);
     } else {
       // no cards are open
@@ -77,8 +78,7 @@ function click(card) {
   });
 }
 
-
-//function to compare cards
+// function to compare cards
 function compare(currentCard, previousCard){
   if(currentCard.innerHTML === previousCard.innerHTML) {
      // matched cards
@@ -87,7 +87,7 @@ function compare(currentCard, previousCard){
     matchedCards.push(currentCard, previousCard);
     openedCards =  [];
     // check if all the cards are matched
-    isOver();
+    gameOver();
 
   } else {
 
@@ -102,17 +102,27 @@ function compare(currentCard, previousCard){
   addMove();
 }
 
-//function to check if the game is over
-function isOver() {
+// function to check if the game is over
+function gameOver() {
   if(matchedCards.length === icons.length) {
     stopTimer();
     gameWon();
   }
 }
 
+// game won popup
+
 function gameWon() {
   const modal = document.querySelector(".modal");
-  modal.style.top = "0%";
+  modal.style.display = 'block';
+  const finalMoves = document.querySelector(".finalMoves");
+  finalMoves.innerHTML = moves;
+  const finalStars = document.querySelector(".finalStars");
+  finalStars.innerHTML = starsContainer.innerHTML;
+  const finalMinutes = document.querySelector(".finalMinutes");
+  finalMinutes.innerHTML = minutes;
+  const finalSeconds = document.querySelector(".finalSeconds");
+  finalSeconds.innerHTML = seconds;
 }
 
 //add moves
@@ -137,21 +147,17 @@ function rating() {
 
 // timer
 
-// Set the default value to the timer's container
-timerContainer.innerHTML = totalMinutes + ":" + totalSeconds;
-
  function startTimer() {
     liveTimer = setInterval(function() {
-        // Increase the totalSeconds by 1
-        totalSeconds++;
 
-        if(totalSeconds === 60){
-          totalMinutes++;
-          totalSeconds = 0;
+        seconds++;
+
+        if(seconds === 60){
+          minutes++;
+          seconds = 0;
         }
 
-        // Update the HTML Container with the new time
-        timerContainer.innerHTML = totalMinutes + ":" + totalSeconds;
+        timerContainer.innerHTML = minutes + ":" + seconds;
     }, 1000);
 }
 
@@ -176,9 +182,9 @@ function empty(){
   moves = 0;
   movesContainer.innerHTML = moves;
   starsContainer.innerHTML = star + star + star;
-  totalSeconds = 0;
-  totalMinutes = 0;
-  timerContainer.innerHTML = totalMinutes + ":" + totalSeconds;
+  seconds = 0;
+  minutes = 0;
+  timerContainer.innerHTML = minutes + ":" + seconds;
 }
 
 //begin game
