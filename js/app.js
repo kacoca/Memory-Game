@@ -106,8 +106,13 @@ function compare(currentCard, previousCard){
 function isOver() {
   if(matchedCards.length === icons.length) {
     stopTimer();
-    gamewon();
+    gameWon();
   }
+}
+
+function gameWon() {
+  const modal = document.querySelector(".modal");
+  modal.style.top = "0%";
 }
 
 //add moves
@@ -154,10 +159,6 @@ function stopTimer() {
   clearInterval(liveTimer);
 }
 
-function gameWon() {
-  const modal = document.querySelector(".modal");
-  modal.innerHTML = "You Win!";
-}
 //restart game
 restartButton.addEventListener("click", function() {
   // delete all cards
@@ -165,6 +166,12 @@ restartButton.addEventListener("click", function() {
   // call init to create new cards
   init();
   // reset variables
+  empty();
+
+});
+
+// function to reset variables
+function empty(){
   matchedCards = [];
   moves = 0;
   movesContainer.innerHTML = moves;
@@ -172,8 +179,7 @@ restartButton.addEventListener("click", function() {
   totalSeconds = 0;
   totalMinutes = 0;
   timerContainer.innerHTML = totalMinutes + ":" + totalSeconds;
-
-});
+}
 
 //begin game
 init();

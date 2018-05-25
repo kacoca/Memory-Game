@@ -85,6 +85,21 @@ h1 {
   pointer-events: none;
 }
 
+.timer {
+  margin: 10px;
+}
+
+.stars {
+  color: pink;
+}
+
+.modal {
+  position: absolute;
+  top: -200%;
+  background-color: pink;
+}
+
+
 /*
  * Styles for the Score Panel
  */
