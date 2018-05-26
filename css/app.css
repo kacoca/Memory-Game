@@ -90,14 +90,15 @@ h1 {
 }
 
 .stars {
-  color: pink;
+  color: #FFCE42;
 }
 
 .modal {
   display: none;
   position: absolute;
   z-index: 1;
-  background-color: pink;
+  background-color: black;
+  color: white;
   width: 400px;
   height: 180px;
   text-align: center;
@@ -106,6 +107,7 @@ h1 {
 }
 
 .finalStars {
+  color: #FFCE42;
   list-style-type: none;
   margin: 0;
   padding: 0;

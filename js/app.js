@@ -38,6 +38,15 @@ let liveTimer,
 timerContainer.innerHTML = minutes + ":" + seconds;
 // restart
 const restartButton = document.querySelector(".restart");
+// game over pop up
+const modal = document.querySelector(".modal");
+const finalMoves = document.querySelector(".finalMoves");
+const finalStars = document.querySelector(".finalStars");
+const finalMinutes = document.querySelector(".finalMinutes");
+const finalSeconds = document.querySelector(".finalSeconds");
+// play again button
+playAgain = document.querySelector(".playAgain");
+
 
 // create card and start the game
 function init() {
@@ -113,17 +122,27 @@ function gameOver() {
 // game won popup
 
 function gameWon() {
-  const modal = document.querySelector(".modal");
   modal.style.display = 'block';
-  const finalMoves = document.querySelector(".finalMoves");
   finalMoves.innerHTML = moves;
-  const finalStars = document.querySelector(".finalStars");
   finalStars.innerHTML = starsContainer.innerHTML;
-  const finalMinutes = document.querySelector(".finalMinutes");
   finalMinutes.innerHTML = minutes;
-  const finalSeconds = document.querySelector(".finalSeconds");
   finalSeconds.innerHTML = seconds;
 }
+
+// play again button
+
+playAgain.addEventListener("click", function() {
+  // delete all cards
+  cardsContainer.innerHTML = "";
+  // call init to create new cards
+  init();
+  // reset variables
+  empty();
+  // remove popup
+  modal.style.display = "none";
+  // start timer
+  startTimer();
+})
 
 //add moves
 function addMove() {
@@ -136,9 +155,9 @@ function addMove() {
 
 // rating system
 function rating() {
-  if(moves < 10) {
+  if(moves <= 12) {
     starsContainer.innerHTML = star + star + star;
-  } else if (moves < 15) {
+  } else if (moves <= 15) {
     starsContainer.innerHTML = star + star;
   } else {
     starsContainer.innerHTML = star;
