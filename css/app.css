@@ -101,6 +101,7 @@ h1 {
   color: white;
   width: 400px;
   height: 180px;
+  border-radius: 18px;
   text-align: center;
   justify-content: center;
   align-items: center;
@@ -115,6 +116,11 @@ h1 {
   display: flex;
   text-align: center;
   justify-content: center;
+}
+
+.playAgain {
+  border-radius: 10px;
+  margin: 10px;
 }
 
 
@@ -143,4 +149,42 @@ h1 {
 .score-panel .restart {
     float: right;
     cursor: pointer;
+}
+
+/*
+* Breakpoints
+*/
+
+@media screen and (max-width: 700px) {
+  .deck {
+    width: 500px;
+    min-height: 600px;
+    margin: auto;
+  }
+  .deck .card {
+    height: 100px;
+    width: 100px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .deck {
+    width: 400px;
+    min-height: 500px;
+  }
+  .deck .card {
+    height: 75px;
+    width: 75px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .deck {
+    width: 300px;
+    min-height: 450px;
+  }
+  .deck .card {
+    height: 55px;
+    width: 55px;
+  }
 }
