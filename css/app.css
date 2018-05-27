@@ -99,12 +99,17 @@ h1 {
   z-index: 1;
   background-color: black;
   color: white;
+  border: 5px dotted white;
   width: 400px;
   height: 180px;
   border-radius: 18px;
   text-align: center;
   justify-content: center;
   align-items: center;
+}
+
+.youWin {
+  font-weight: 500;
 }
 
 .finalStars {
@@ -121,6 +126,12 @@ h1 {
 .playAgain {
   border-radius: 10px;
   margin: 10px;
+  background-color: #aa7ecd;
+  border: none;
+  color: white;
+  padding: 5px 15px;
+  text-align: center;
+  font-size: 18px;
 }
 
 
@@ -176,6 +187,9 @@ h1 {
     height: 75px;
     width: 75px;
   }
+  .modal {
+    max-width: 325px;
+  }
 }
 
 @media screen and (max-width: 420px) {
@@ -186,5 +200,11 @@ h1 {
   .deck .card {
     height: 55px;
     width: 55px;
+  }
+  .score-panel {
+    max-width: 300px;
+  }
+  .modal {
+    max-width: 250px;
   }
 }
