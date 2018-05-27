@@ -1,20 +1,20 @@
 // varibles list
-const icons = ["fa fa-diamond",
-            "fa fa-diamond",
-            "fa fa-paper-plane-o",
-            "fa fa-paper-plane-o",
-            "fa fa-anchor",
-            "fa fa-anchor",
-            "fa fa-bolt",
-            "fa fa-bolt",
-            "fa fa-cube",
-            "fa fa-cube",
-            "fa fa-bomb",
-            "fa fa-bomb",
-            "fa fa-leaf",
-            "fa fa-leaf",
-            "fa fa-bicycle",
-            "fa fa-bicycle"];
+const icons = ["fas fa-birthday-cake",
+            "fas fa-birthday-cake",
+            "fas fa-kiwi-bird",
+            "fas fa-kiwi-bird",
+            "fas fa-quidditch",
+            "fas fa-quidditch",
+            "fas fa-heart",
+            "fas fa-heart",
+            "fas fa-puzzle-piece",
+            "fas fa-puzzle-piece",
+            "fas fa-couch",
+            "fas fa-couch",
+            "fas fa-rocket",
+            "fas fa-rocket",
+            "fas fa-moon",
+            "fas fa-moon"];
 
 // cards
 const cardsContainer = document.querySelector(".deck");
@@ -53,7 +53,7 @@ function init() {
   //const icons = shuffle(iconsArray);
   for(let i = 0; i < icons.length; i++) {
     const card = document.createElement("li");
-    card.classList.add("card");
+    card.classList.add("card", "animated");
     card.innerHTML = `<i class="${icons[i]}"></i>`;
     cardsContainer.appendChild(card);
   // add click event to each card
@@ -75,13 +75,13 @@ function click(card) {
     // a card has been opened
     if(openedCards.length === 1) {
 
-      card.classList.add("open", "show", "disable");
+      card.classList.add("open", "show", "disable", "pulse");
       openedCards.push(this);
       // comparing two opened cards
       compare(currentCard, previousCard);
     } else {
       // no cards are open
-      currentCard.classList.add("open", "show", "disable");
+      currentCard.classList.add("open", "show", "disable", "pulse");
       openedCards.push(this);
     }
   });
@@ -91,8 +91,8 @@ function click(card) {
 function compare(currentCard, previousCard){
   if(currentCard.innerHTML === previousCard.innerHTML) {
      // matched cards
-    currentCard.classList.add("match");
-    previousCard.classList.add("match");
+    currentCard.classList.add("match", "fadeOut");
+    previousCard.classList.add("match", "fadeOut");
     matchedCards.push(currentCard, previousCard);
     openedCards =  [];
     // check if all the cards are matched
@@ -123,7 +123,7 @@ function gameOver() {
 
 function gameWon() {
   modal.style.display = 'block';
-  finalMoves.innerHTML = moves;
+  finalMoves.innerHTML = moves + 1;
   finalStars.innerHTML = starsContainer.innerHTML;
   finalMinutes.innerHTML = minutes;
   finalSeconds.innerHTML = seconds;
@@ -155,9 +155,9 @@ function addMove() {
 
 // rating system
 function rating() {
-  if(moves <= 12) {
+  if(moves < 12) {
     starsContainer.innerHTML = star + star + star;
-  } else if (moves <= 15) {
+  } else if (moves < 15) {
     starsContainer.innerHTML = star + star;
   } else {
     starsContainer.innerHTML = star;
@@ -192,7 +192,6 @@ restartButton.addEventListener("click", function() {
   init();
   // reset variables
   empty();
-
 });
 
 // function to reset variables
