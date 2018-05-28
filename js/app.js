@@ -198,6 +198,7 @@ restartButton.addEventListener("click", function() {
 // function to reset variables
 function empty(){
   matchedCards = [];
+  openedCards = [];
   moves = 0;
   movesContainer.innerHTML = moves;
   starsContainer.innerHTML = star + star + star;
