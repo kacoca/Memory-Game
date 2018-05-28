@@ -3,9 +3,9 @@
 ## Table of Contents
 
 * [Description](#description)
-* [Dependencies](#dependencies)
 * [Rules](#rules)
 * [Demo](#demo)
+* [Dependencies](#dependencies)
 
 ## Description
 
