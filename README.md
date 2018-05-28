@@ -2,19 +2,23 @@
 
 ## Table of Contents
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+* [Description](#description)
+* [Dependencies](#dependencies)
+* [Rules](#rules)
+* [Demo](#demo)
 
-## Instructions
+## Description
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+This is a memory game project built for the Udacity FEND Nanodegree. A file with some starter code was provided, and it was my task to make the game function. It was built using html, css, and javascript.
 
-To get started, open `js/app.js` and start building out the app's functionality
+##Rules
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+The objective is to match all eight pairs of cards in the fewest moves possible. Stars are awarded depending on the number of moves used.
 
-## Contributing
+##Demo
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+A demo of the game can be found <a href="https://codepen.io/kacoca/full/BxGObz/">here</a>.
 
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+## Dependencies
+
+Font Awesome, Google Fonts (Coda), and Animate.css
