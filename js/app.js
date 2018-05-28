@@ -1,5 +1,5 @@
 // varibles list
-const icons = ["fas fa-birthday-cake",
+const iconsArray = ["fas fa-birthday-cake",
             "fas fa-birthday-cake",
             "fas fa-kiwi-bird",
             "fas fa-kiwi-bird",
@@ -15,7 +15,6 @@ const icons = ["fas fa-birthday-cake",
             "fas fa-rocket",
             "fas fa-moon",
             "fas fa-moon"];
-
 // cards
 const cardsContainer = document.querySelector(".deck");
 let openedCards = [];
@@ -32,9 +31,8 @@ const star = `<li><i class="fa fa-star"></i></li>`;
 starsContainer.innerHTML = star + star + star;
 // timer
 const timerContainer = document.querySelector(".timer");
-let liveTimer,
-    seconds = 0;
-    minutes = 0;
+let seconds = 0;
+let minutes = 0;
 timerContainer.innerHTML = minutes + ":" + seconds;
 // restart
 const restartButton = document.querySelector(".restart");
@@ -44,13 +42,10 @@ const finalMoves = document.querySelector(".finalMoves");
 const finalStars = document.querySelector(".finalStars");
 const finalMinutes = document.querySelector(".finalMinutes");
 const finalSeconds = document.querySelector(".finalSeconds");
-// play again button
-playAgain = document.querySelector(".playAgain");
-
 
 // create card and start the game
-function init() {
-  //const icons = shuffle(iconsArray);
+function begin() {
+  const icons = shuffle(iconsArray);
   for(let i = 0; i < icons.length; i++) {
     const card = document.createElement("li");
     card.classList.add("card", "animated");
@@ -60,21 +55,33 @@ function init() {
   click(card);
   }
 }
-// click event
 
+// Shuffle function from http://stackoverflow.com/a/2450976
+function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+}
+
+// a card is clicked
 function click(card) {
   card.addEventListener("click", function() {
-
+    //starts timer when first card is clicked
     if(firstClick) {
       startTimer();
     firstClick = false; }
-
     const currentCard = this;
     const previousCard = openedCards[0];
-
     // a card has been opened
     if(openedCards.length === 1) {
-
       card.classList.add("open", "show", "disable", "pulse");
       openedCards.push(this);
       // comparing two opened cards
@@ -97,9 +104,7 @@ function compare(currentCard, previousCard){
     openedCards =  [];
     // check if all the cards are matched
     gameOver();
-
   } else {
-
     // show both opened cards
     setTimeout(function() {
       currentCard.classList.remove("open", "show", "disable");
@@ -113,16 +118,16 @@ function compare(currentCard, previousCard){
 
 // function to check if the game is over
 function gameOver() {
-  if(matchedCards.length === icons.length) {
+  if(matchedCards.length === iconsArray.length) {
     stopTimer();
     gameWon();
   }
 }
 
 // game won popup
-
 function gameWon() {
   modal.style.display = 'block';
+  //moves increased by one to fix error in modal where incorrect number of moves is shown
   finalMoves.innerHTML = moves + 1;
   finalStars.innerHTML = starsContainer.innerHTML;
   finalMinutes.innerHTML = minutes;
@@ -130,34 +135,35 @@ function gameWon() {
 }
 
 // play again button
+playAgain = document.querySelector(".playAgain");
 
 playAgain.addEventListener("click", function() {
   // delete all cards
   cardsContainer.innerHTML = "";
-  // call init to create new cards
-  init();
+  // call begin to create new cards
+  begin();
   // reset variables
   empty();
   // remove popup
   modal.style.display = "none";
   // start timer
   startTimer();
-})
+});
 
 //add moves
 function addMove() {
   moves++;
   movesContainer.innerHTML = moves;
-
   // set rating
   rating();
 }
 
 // rating system
+// ratings decreased by one move to account for error in popup modal where incorrect number of stars is shown on last possible move
 function rating() {
-  if(moves < 12) {
+  if(moves < 14) {
     starsContainer.innerHTML = star + star + star;
-  } else if (moves < 15) {
+  } else if (moves < 16) {
     starsContainer.innerHTML = star + star;
   } else {
     starsContainer.innerHTML = star;
@@ -165,31 +171,26 @@ function rating() {
 }
 
 // timer
-
  function startTimer() {
-    liveTimer = setInterval(function() {
-
+    initialTimer = setInterval(function() {
         seconds++;
-
         if(seconds === 60){
           minutes++;
           seconds = 0;
         }
-
         timerContainer.innerHTML = minutes + ":" + seconds;
     }, 1000);
 }
-
 function stopTimer() {
-  clearInterval(liveTimer);
+  clearInterval(initialTimer);
 }
 
 //restart game
 restartButton.addEventListener("click", function() {
   // delete all cards
   cardsContainer.innerHTML = "";
-  // call init to create new cards
-  init();
+  // call begin to create new cards
+  begin();
   // reset variables
   empty();
 });
@@ -206,19 +207,4 @@ function empty(){
 }
 
 //begin game
-init();
-
-// Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
-
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-
-    return array;
-}
+begin();
